@@ -1,0 +1,102 @@
+\documentclass[11pt]{article}
+
+\usepackage[left=2cm,right=2cm,top=2.5cm,bottom=2.5cm]{geometry}
+\usepackage{tikz}
+\usetikzlibrary{er,arrows}
+
+
+
+\title{GDb Aufgabenblatt 3}
+\author{Tim Kromer, Luke Kroll, Sven Schmidt}
+
+
+\begin{document}
+\tikzstyle{erbt} = [->, >=open triangle 90, thick]
+
+\maketitle
+
+\section*{1. Informationsmodellierung mit dem Entity-Relationship-Modell}
+
+
+\begin{center}
+\begin{tikzpicture}
+
+\node[entity](instrument) at (0,6) {Instrument}
+node [entity] (vereinsmitglied)  at (0,0) {Vereinsmitglied}
+node [entity] (musiker) at (0,2) {Musiker}
+edge [erbt] (vereinsmitglied)
+node [entity] (chorleiter) at (9,6) {Chorleiter}
+edge [erbt] (musiker)
+node [entity] (veranstaltung) at (0,-6) {Veranstaltung}
+node [entity] (performance) at (5,-9) {Performance}
+node [entity] (musikstück) at (-5,-9) {Musikstueck}
+node [relationship] (komp) at (-5,2) {komponiert}
+edge (musiker)
+edge (musikstück)
+node [relationship] (org) at (-2,-3) {organisiert}
+edge (vereinsmitglied)
+edge (veranstaltung)
+node [relationship] (bes) at (2,-3) {besucht}
+edge  (vereinsmitglied)  
+edge (veranstaltung)
+node [relationship] (spielt) at (0,4) {spielt} 
+edge (musiker)
+edge (instrument)
+node[relationship] (teil) at (5,2) {nimmt teil}
+edge (musiker)
+edge (performance)
+node[relationship] (leitet) at (9,-9) {leitet}
+edge (chorleiter)
+edge (performance)
+node[relationship] (aufführung) at (0,-9) {Auffuehrung}
+edge (veranstaltung)
+edge (performance)
+edge (musikstück)
+node (besMit) at (1.5,-1) {[0,*]}
+node (orgMit) at (-1.5,-1) {[0,*]}
+node (besVer) at (1.5,-5) {[0,*]}
+node (orgVer) at (-1.5,-5) {[1,*]}
+node (spIn) at (-0.5,5) {[0,*]}
+node (spMu) at (-0.5,3) {[0,*]}
+node (koMu) at (-2.5,2.5) {[0,*]}
+node (koSt) at (-5.5,-3) {[1,1]}
+node (leiCho) at (9.5,-1) {[0,*]}
+node (leiPer) at (7.5,-9.5) {[1,1]}
+node (teiMu) at (2.5,2.5) {[0,*]}
+node (teiPer) at (5.5,-3) {[1,*]}
+node (aufPer) at (2.5,-9.5) {[1,1]}
+node (aufVer) at (0.5,-7) {[1,5]}
+node (aufSt) at (-2.5,-9.5) {[0,*]}
+node [attribute] (in-Bez) at (-3,6) {\underline{Bezeichnung}}
+edge (instrument)
+node [attribute] (in-Teile) at (2.5,6) {Teile}
+edge (instrument)
+node [attribute] (chJahre) at (6,6) {Chorjahre}
+edge (chorleiter)
+node [attribute] (mitNr) at (-3,1) {\underline{Mitgliedsnr.}}
+edge (vereinsmitglied)
+node [attribute] (mitNa) at (-3,-0.5) {Name}
+edge (vereinsmitglied)
+node [attribute] (mitDat) at (3,1) {E.datum}
+edge (vereinsmitglied)
+node [attribute] (stTitl) at (-3,-8) {\underline{Titel}}
+edge (musikstück)
+node [attribute] (verBez) at (-3,-6) {\underline{Bez.}}
+edge (veranstaltung)
+node [attribute] (verDat) at(3,-6) {Datum}
+edge (veranstaltung)
+node[attribute] (perTitl) at (3,-8) {\underline{Titel}}
+edge (performance)
+node [attribute] (perEnd) at (7.5,-8) {Endzeit}
+edge (performance)
+node [attribute] (perStart) at (6.5, -7) {Startzeit}
+edge (performance)
+;
+
+\end{tikzpicture}
+\end{center}
+
+
+
+	
+\end{document}
